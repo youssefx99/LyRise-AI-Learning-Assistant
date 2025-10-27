@@ -2,7 +2,7 @@
 
 An intelligent web application that generates personalized study plans for any topic using AI. Built with React and powered by n8n + OpenAI.
 
-![Study Plan Generator](https://via.placeholder.com/800x400?text=Study+Plan+Generator)
+![Study Plan Generator](./src/assets/image1.png)
 
 ## ✨ Features
 
@@ -29,7 +29,7 @@ An intelligent web application that generates personalized study plans for any t
 Before you begin, ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/) (v16 or higher)
-- [npm](https://www.npmjs.com/) or [yarn](https://yarnpkg.com/)
+- [npm](https://www.npmjs.com/)
 - Git
 
 ## 🚀 Installation
@@ -45,8 +45,6 @@ cd study-plan-generator
 
 ```
 npm install
-# or
-yarn install
 ```
 
 ### 3. Set up environment variables
@@ -62,8 +60,6 @@ VITE_JWT_TOKEN=your_authentication_token_here
 
 ```
 npm run dev
-# or
-yarn dev
 ```
 
 The application will open at `http://localhost:5173`
@@ -130,16 +126,6 @@ study-plan-generator/
 
 ## 🔧 Configuration
 
-### API Endpoints
-
-The application connects to n8n webhooks with the following operations:
-
-- `generate` - Generate a new study plan
-- `save` - Save a study plan to history
-- `list` - Get all saved plans
-- `get_plan` - Get a specific plan by ID
-- `delete` - Delete a plan from history
-
 ### Authentication
 
 The app uses Header Authentication with n8n:
@@ -150,8 +136,6 @@ The app uses Header Authentication with n8n:
 
 ```
 npm run build
-# or
-yarn build
 ```
 
 The production-ready files will be in the `dist/` directory.
@@ -160,63 +144,20 @@ The production-ready files will be in the `dist/` directory.
 
 ```
 npm run preview
-# or
-yarn preview
 ```
 
-## 🚢 Deployment
 
-### Deploy to Vercel
 
-```
-npm install -g vercel
-vercel
-```
-
-### Deploy to Netlify
-
-```
-npm install -g netlify-cli
-netlify deploy --prod
-```
-
-Remember to set your environment variables in the hosting platform's dashboard.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [OpenAI](https://openai.com/) for the AI capabilities
-- [n8n](https://n8n.io/) for workflow automation
-- [Lucide](https://lucide.dev/) for beautiful icons
-- [Tailwind CSS](https://tailwindcss.com/) for styling utilities
 
 ## 📧 Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
+Youssef Faisal - [yousseffaissal0@gmail.com]
+My LinkedIn - [Youssef Faisal](https://www.linkedin.com/in/yousef-faisal/)
 
-Project Link: [https://github.com/yourusername/study-plan-generator](https://github.com/yourusername/study-plan-generator)
 
----
+## **Create .env**
 
-Made with ❤️ and React
-```
-
-## **Create .env.example**
-
-Also create a `.env.example` file for other developers:
+Also create a `.env` file for other developers:
 
 ```env
 VITE_N8N_WEBHOOK_URL=your_n8n_webhook_url_here
