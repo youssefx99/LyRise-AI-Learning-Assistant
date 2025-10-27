@@ -1,8 +1,3 @@
-# **README.md for Your Study Plan Generator**
-
-Here's a comprehensive README file for your project:
-
-```markdown
 # AI Study Plan Generator
 
 An intelligent web application that generates personalized study plans for any topic using AI. Built with React and powered by n8n + OpenAI.
