@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BookOpen, Trash2 } from 'lucide-react'
+import ButtonLoader from './ButtonLoader'
 
 export default function Sidebar({ showSidebar, setShowSidebar, studyHistory, loadHistory, deleteHistory }) {
+  const [deletingId, setDeletingId] = useState(null)
+  
   if (!showSidebar) return null
 
   return (
@@ -33,11 +36,25 @@ export default function Sidebar({ showSidebar, setShowSidebar, studyHistory, loa
                   )}
                 </button>
                 <button
-                  onClick={() => deleteHistory(item.id)}
-                  className="text-[#c55d3e] hover:text-[#a04a2f] text-sm flex items-center gap-1"
+                  onClick={async () => {
+                    setDeletingId(item.id)
+                    await deleteHistory(item.id)
+                    setDeletingId(null)
+                  }}
+                  disabled={deletingId === item.id}
+                  className="text-[#c55d3e] hover:text-[#a04a2f] text-sm flex items-center gap-1 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Trash2 className="w-4 h-4" />
-                  Delete
+                  {deletingId === item.id ? (
+                    <>
+                      <ButtonLoader size="sm" />
+                      Deleting...
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="w-4 h-4" />
+                      Delete
+                    </>
+                  )}
                 </button>
               </div>
             ))

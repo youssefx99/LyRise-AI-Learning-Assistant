@@ -1,6 +1,7 @@
 import React from 'react'
 import { Printer } from 'lucide-react'
 import ResourceCard from './ResourceCard'
+import ButtonLoader from './ButtonLoader'
 
 export default function ResourcesSection({ resources, onSave, onPrint, isLoading }) {
 
@@ -18,8 +19,9 @@ export default function ResourcesSection({ resources, onSave, onPrint, isLoading
           <button
             onClick={onSave}
             disabled={isLoading}
-            className="flex-1 py-4 bg-[#1a2332] text-white rounded-xl font-medium hover:bg-[#2d3748] transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 py-4 bg-[#1a2332] text-white rounded-xl font-medium hover:bg-[#2d3748] transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
           >
+            {isLoading && <ButtonLoader size="sm" />}
             {isLoading ? 'Saving...' : 'Save for Later'}
           </button>
           <button
@@ -50,8 +52,9 @@ export default function ResourcesSection({ resources, onSave, onPrint, isLoading
         <button
           onClick={onSave}
           disabled={isLoading}
-          className="flex-1 py-4 bg-[#1a2332] text-white rounded-xl font-medium hover:bg-[#2d3748] transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 py-4 bg-[#1a2332] text-white rounded-xl font-medium hover:bg-[#2d3748] transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
+          {isLoading && <ButtonLoader size="sm" />}
           {isLoading ? 'Saving...' : 'Save for Later'}
         </button>
         <button

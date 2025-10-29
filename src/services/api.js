@@ -136,9 +136,13 @@ export async function saveStudyHistory(studyData) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    await response.json();
+    const result = await response.json();
 
-    return { success: true, message: 'Study plan saved successfully!' };
+    return { 
+      success: true, 
+      message: 'Study plan saved successfully!',
+      data: result
+    };
   } catch (error) {
     console.error('Save Error:', error);
     throw new Error('Failed to save study plan. Please try again.');
@@ -228,9 +232,14 @@ export async function deleteStudyplan(id) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    return true;
+    const result = await response.json();
+
+    return { 
+      success: true,
+      data: result
+    };
   } catch (error) {
     console.error('Fetch Error:', error);
-    return false;
+    throw error;
   }
 }

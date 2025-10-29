@@ -14,7 +14,9 @@ export default function StudyPlanView() {
   const [studyHistory, setStudyHistory] = useState([])
   const [showSidebar, setShowSidebar] = useState(false)
   const [showToast, setShowToast] = useState(false)
+  const [toastMessage, setToastMessage] = useState('')
   const [isLoading, setIsLoading] = useState(true)
+  const [isSaving, setIsSaving] = useState(false)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,16 +56,26 @@ export default function StudyPlanView() {
   }
 
   const handleSave = async () => {
+    setIsSaving(true)
     try {
-      await saveStudyHistory(studyData)
-      setShowToast(true)
-      setTimeout(() => setShowToast(false), 3000)
+      const result = await saveStudyHistory(studyData)
       
-      const history = await getStudyHistory()
-      setStudyHistory(history)
+      // Update state based on n8n workflow response
+      if (result.success) {
+        setToastMessage(result.message || '✓ Saved successfully!')
+        setShowToast(true)
+        setTimeout(() => setShowToast(false), 3000)
+        
+        const history = await getStudyHistory()
+        setStudyHistory(history)
+      }
     } catch (error) {
       console.error('Error saving study plan:', error)
-      alert('Failed to save study plan')
+      setToastMessage('❌ Failed to save study plan')
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 3000)
+    } finally {
+      setIsSaving(false)
     }
   }
 
@@ -75,14 +87,24 @@ export default function StudyPlanView() {
 
   const deleteHistory = async (deleteId) => {
     try {
-      await deleteStudyplan(deleteId)
-      setStudyHistory(prev => prev.filter(h => h.id !== deleteId))
+      const result = await deleteStudyplan(deleteId)
       
-      if (parseInt(id) === deleteId) {
-        navigate('/')
+      if (result.success) {
+        setStudyHistory(prev => prev.filter(h => h.id !== deleteId))
+        
+        if (parseInt(id) === deleteId) {
+          navigate('/')
+        }
+        
+        setToastMessage('✓ Study plan deleted successfully!')
+        setShowToast(true)
+        setTimeout(() => setShowToast(false), 3000)
       }
     } catch (error) {
       console.error('Error deleting study plan:', error)
+      setToastMessage('❌ Failed to delete study plan')
+      setShowToast(true)
+      setTimeout(() => setShowToast(false), 3000)
     }
   }
 
@@ -127,12 +149,13 @@ export default function StudyPlanView() {
           studyData={studyData}
           onBack={handleBack}
           onSave={handleSave}
+          isSaving={isSaving}
         />
       </div>
 
       {showToast && (
         <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-[#6b8e7f] text-white px-6 py-3 rounded-xl shadow-lg z-50">
-          ✓ Saved successfully!
+          {toastMessage}
         </div>
       )}
 

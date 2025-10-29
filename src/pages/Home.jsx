@@ -21,7 +21,6 @@ export default function Home() {
     try {
       const data = await generateStudyPlan(topic)
       
-      // Navigation data through state
       navigate(`/studyplan/${data.id}`, { 
         state: { studyData: data, isNew: true }
       })
@@ -40,10 +39,14 @@ export default function Home() {
 
   const deleteHistory = async (id) => {
     try {
-      await deleteStudyplan(id)
-      setStudyHistory(prev => prev.filter(h => h.id !== id))
+      const result = await deleteStudyplan(id)
+      
+      if (result.success) {
+        setStudyHistory(prev => prev.filter(h => h.id !== id))
+      }
     } catch (error) {
       console.error('Error deleting study plan:', error)
+      alert('Failed to delete study plan')
     }
   }
 
